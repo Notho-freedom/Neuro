@@ -7,6 +7,7 @@ import type { AIState } from "./state-indicator";
 // ==============================================
 // PARTICLE FIELD - Background neural animation
 // Creates ambient particle network effect
+// Styled with Notilus neon colors
 // ==============================================
 
 interface Particle {
@@ -34,13 +35,17 @@ function ParticleField({
   const animationRef = useRef<number>();
   const mouseRef = useRef({ x: 0, y: 0 });
 
+  // Notilus-themed state colors
   const stateColors: Record<AIState, { r: number; g: number; b: number }> = {
-    idle: { r: 100, g: 180, b: 220 },
-    listening: { r: 0, g: 220, b: 255 },
-    thinking: { r: 220, g: 100, b: 220 },
-    speaking: { r: 255, g: 180, b: 50 },
-    error: { r: 255, g: 80, b: 80 },
+    idle: { r: 107, g: 114, b: 128 }, // Gray
+    listening: { r: 0, g: 255, b: 255 }, // Cyan
+    thinking: { r: 255, g: 45, b: 146 }, // Magenta/Pink (Notilus)
+    speaking: { r: 255, g: 149, b: 0 }, // Amber
+    error: { r: 255, g: 69, b: 58 }, // Red
   };
+
+  // Primary color for connections
+  const primaryColor = { r: 255, g: 45, b: 85 }; // Notilus Red
 
   const initParticles = useCallback(
     (width: number, height: number) => {
@@ -101,14 +106,28 @@ function ParticleField({
         particle.vy *= 0.99;
       }
 
-      // Draw particle
+      // Draw particle with neon glow effect
+      const gradient = ctx.createRadialGradient(
+        particle.x, particle.y, 0,
+        particle.x, particle.y, particle.radius * 3
+      );
+      gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${particle.alpha})`);
+      gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${particle.alpha * 0.3})`);
+      gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+      
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.radius * 3, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Core particle
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${particle.alpha})`;
       ctx.fill();
     }
 
-    // Draw connections
+    // Draw connections with Notilus primary color gradient
     const connectionDistance = state === "thinking" ? 120 : 80;
     for (let i = 0; i < particlesRef.current.length; i++) {
       for (let j = i + 1; j < particlesRef.current.length; j++) {
@@ -120,10 +139,17 @@ function ParticleField({
 
         if (dist < connectionDistance) {
           const alpha = (1 - dist / connectionDistance) * 0.3;
+          
+          // Create gradient for connection line
+          const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+          gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+          gradient.addColorStop(0.5, `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, ${alpha * 0.5})`);
+          gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+          
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+          ctx.strokeStyle = gradient;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -131,7 +157,7 @@ function ParticleField({
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [state, stateColors]);
+  }, [state, stateColors, primaryColor]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

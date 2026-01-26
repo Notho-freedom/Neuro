@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 // ==============================================
 // THOUGHT STREAM - Streaming text display
-// Typewriter effect with neural aesthetics
+// Typewriter effect with Notilus aesthetics
 // ==============================================
 
 interface ThoughtStreamProps {
@@ -76,7 +76,7 @@ function ThoughtStream({
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-y-auto max-h-64 scrollbar-thin",
+        "relative overflow-y-auto max-h-64",
         className
       )}
     >
@@ -84,7 +84,7 @@ function ThoughtStream({
         {displayedContent.split("\n").map((line, lineIndex) => (
           <motion.p
             key={lineIndex}
-            className="leading-relaxed text-foreground/90"
+            className="leading-relaxed text-foreground/90 font-sans"
             initial={{ opacity: 0, x: -5 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2 }}
@@ -106,17 +106,20 @@ function ThoughtStream({
           </motion.p>
         ))}
 
-        {/* Cursor */}
+        {/* Cursor with Notilus neon effect */}
         <AnimatePresence>
           {isStreaming && currentIndex < safeContent.length && (
             <motion.span
-              className="inline-block w-2 h-5 bg-primary ml-1 align-middle"
+              className="inline-block w-2 h-5 bg-primary ml-1 align-middle rounded-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1, 0] }}
               exit={{ opacity: 0 }}
               transition={{
                 duration: 0.8,
                 repeat: Number.POSITIVE_INFINITY,
+              }}
+              style={{
+                filter: "drop-shadow(0 0 4px var(--glow-primary))",
               }}
             />
           )}

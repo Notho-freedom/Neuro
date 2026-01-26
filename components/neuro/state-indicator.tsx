@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 // ==============================================
 // STATE INDICATOR - Visual AI state representation
 // Shows: idle, listening, thinking, speaking, error
+// Styled with Notilus neon effects and colors
 // ==============================================
 
 export type AIState = "idle" | "listening" | "thinking" | "speaking" | "error";
@@ -25,6 +26,7 @@ const stateConfig: Record<
     label: string;
     color: string;
     bgColor: string;
+    glowColor: string;
     animation: string;
   }
 > = {
@@ -32,30 +34,35 @@ const stateConfig: Record<
     label: "En veille",
     color: "text-state-idle",
     bgColor: "bg-state-idle",
+    glowColor: "rgba(107, 114, 128, 0.5)",
     animation: "",
   },
   listening: {
     label: "Ecoute...",
     color: "text-state-listening",
     bgColor: "bg-state-listening",
+    glowColor: "var(--glow-cyan)",
     animation: "animate-neuro-pulse",
   },
   thinking: {
     label: "Reflexion...",
     color: "text-state-thinking",
     bgColor: "bg-state-thinking",
+    glowColor: "var(--glow-magenta)",
     animation: "animate-neuro-thinking",
   },
   speaking: {
     label: "Reponse",
     color: "text-state-speaking",
     bgColor: "bg-state-speaking",
+    glowColor: "var(--glow-amber)",
     animation: "animate-neuro-pulse",
   },
   error: {
     label: "Erreur",
     color: "text-state-error",
     bgColor: "bg-state-error",
+    glowColor: "rgba(255, 69, 58, 0.5)",
     animation: "",
   },
 };
@@ -99,11 +106,9 @@ function StateIndicator({
   state = "idle",
   size = "md",
   showLabel = false,
-  showPulse = false,
   className,
   onClick,
 }: StateIndicatorProps) {
-  // Ensure we have a valid state, fallback to idle
   const validState = stateConfig[state] ? state : "idle";
   const config = stateConfig[validState];
   const sizes = sizeConfig[size] ?? sizeConfig.md;
@@ -122,7 +127,7 @@ function StateIndicator({
         role={onClick ? "button" : undefined}
         tabIndex={onClick ? 0 : undefined}
       >
-        {/* Outer ripple rings */}
+        {/* Outer ripple rings with Notilus neon effect */}
         <AnimatePresence>
           {(validState === "listening" || validState === "thinking") && (
             <>
@@ -145,6 +150,9 @@ function StateIndicator({
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "easeInOut",
                 }}
+                style={{
+                  filter: `drop-shadow(0 0 6px ${config.glowColor})`,
+                }}
               />
               <motion.div
                 key="ring-2"
@@ -166,12 +174,15 @@ function StateIndicator({
                   ease: "easeInOut",
                   delay: 0.3,
                 }}
+                style={{
+                  filter: `drop-shadow(0 0 4px ${config.glowColor})`,
+                }}
               />
             </>
           )}
         </AnimatePresence>
 
-        {/* Core orb */}
+        {/* Core orb with Notilus glow */}
         <motion.div
           className={cn(
             "relative rounded-full",
@@ -185,18 +196,18 @@ function StateIndicator({
               ? {
                   scale: [1, 1.2, 1],
                   boxShadow: [
-                    "0 0 10px oklch(0.8 0.18 85 / 0.5)",
-                    "0 0 25px oklch(0.8 0.18 85 / 0.8)",
-                    "0 0 10px oklch(0.8 0.18 85 / 0.5)",
+                    `0 0 10px ${config.glowColor}`,
+                    `0 0 25px ${config.glowColor}`,
+                    `0 0 10px ${config.glowColor}`,
                   ],
                 }
               : validState === "listening"
                 ? {
                     scale: [1, 1.15, 1],
                     boxShadow: [
-                      "0 0 10px oklch(0.75 0.18 195 / 0.5)",
-                      "0 0 20px oklch(0.75 0.18 195 / 0.7)",
-                      "0 0 10px oklch(0.75 0.18 195 / 0.5)",
+                      `0 0 10px ${config.glowColor}`,
+                      `0 0 20px ${config.glowColor}`,
+                      `0 0 10px ${config.glowColor}`,
                     ],
                   }
                 : validState === "error"
@@ -213,8 +224,10 @@ function StateIndicator({
           style={{
             boxShadow:
               validState === "idle"
-                ? "0 0 8px oklch(0.5 0.1 195 / 0.4)"
-                : undefined,
+                ? `0 0 8px ${config.glowColor}`
+                : validState === "thinking"
+                  ? `0 0 15px var(--glow-magenta)`
+                  : undefined,
           }}
         />
 
@@ -242,6 +255,7 @@ function StateIndicator({
                   }}
                   style={{
                     left: `${35 + i * 15}%`,
+                    filter: `drop-shadow(0 0 4px ${config.glowColor})`,
                   }}
                 />
               ))}
@@ -250,12 +264,12 @@ function StateIndicator({
         </AnimatePresence>
       </div>
 
-      {/* Label */}
+      {/* Label with Notilus typography */}
       <AnimatePresence>
         {showLabel && (
           <motion.span
             className={cn(
-              "font-mono uppercase tracking-wider",
+              "font-sans uppercase tracking-wider font-semibold",
               sizes.label,
               config.color
             )}
@@ -263,6 +277,9 @@ function StateIndicator({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
             key={validState}
+            style={{
+              textShadow: `0 0 10px ${config.glowColor}`,
+            }}
           >
             {config.label}
           </motion.span>
