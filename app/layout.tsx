@@ -1,29 +1,27 @@
 import React from "react"
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Orbitron, Rajdhani } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-
-const _geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-});
-
-const _geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-});
 
 const _orbitron = Orbitron({
   subsets: ["latin"],
   variable: "--font-orbitron",
   weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const _rajdhani = Rajdhani({
+  subsets: ["latin"],
+  variable: "--font-rajdhani",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Neuro - Cognitive AI Interface",
+  title: "Notilus Browser - Le Navigateur des Developpeurs",
   description:
-    "Ambient AI assistant with futuristic neural interface. Inspired by Accel World.",
+    "Navigateur futuriste concu par et pour les developpeurs. Design gaming/sci-fi avec des fonctionnalites professionnelles avancees.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a14",
+  themeColor: "#09080D",
   colorScheme: "dark",
 };
 
@@ -55,9 +53,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="fr" className="dark">
       <body
-        className={`${_geist.variable} ${_geistMono.variable} ${_orbitron.variable} font-sans antialiased`}
+        className={`${_orbitron.variable} ${_rajdhani.variable} font-sans antialiased`}
+        style={{ fontFamily: "'Rajdhani', sans-serif" }}
       >
         {children}
         <Analytics />

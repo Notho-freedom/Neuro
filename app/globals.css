@@ -4,124 +4,169 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ==============================================
-   NEURO DESIGN SYSTEM - Accel World Inspired
-   Cyberpunk Ambient Cognitive Interface
+   NEURO + NOTILUS DESIGN SYSTEM
+   Fusion of Neural AI Interface with Notilus Gaming Aesthetic
    ============================================== */
 
 :root {
-  /* Core Background - Deep space black */
-  --background: oklch(0.08 0.01 260);
-  --foreground: oklch(0.95 0.01 260);
+  /* ========== NOTILUS CORE COLORS ========== */
+  /* Rouge Notilus - Primary */
+  --notilus-red: #FF2D55;
+  --notilus-red-dark: #B1165A;
+  --notilus-red-rgb: 255, 45, 85;
+  
+  /* Chrome - Interface */
+  --chrome: #101018;
+  --chrome-dark: #0B0B11;
+  --chrome-light: #181824;
+  
+  /* Native Background */
+  --native-bg: #09080D;
+  --tooltip-bg: #1C1C28;
+  
+  /* ========== THEME COLORS ========== */
+  --background: #09080D;
+  --foreground: #FFFFFF;
   
   /* Card/Surface - Glassmorphism base */
-  --card: oklch(0.12 0.015 260);
-  --card-foreground: oklch(0.95 0.01 260);
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #FFFFFF;
   
-  /* Popover - Slightly elevated */
-  --popover: oklch(0.14 0.02 260);
-  --popover-foreground: oklch(0.95 0.01 260);
+  /* Popover */
+  --popover: #1C1C28;
+  --popover-foreground: #FFFFFF;
   
-  /* Primary - Cyan Neural */
-  --primary: oklch(0.75 0.18 195);
-  --primary-foreground: oklch(0.1 0.01 260);
+  /* Primary - Neon Red */
+  --primary: #FF2D55;
+  --primary-dark: #B1165A;
+  --primary-foreground: #FFFFFF;
   
-  /* Secondary - Deep blue */
-  --secondary: oklch(0.18 0.03 260);
-  --secondary-foreground: oklch(0.85 0.05 195);
+  /* Secondary */
+  --secondary: rgba(255, 255, 255, 0.05);
+  --secondary-foreground: rgba(255, 255, 255, 0.8);
   
-  /* Muted - Dim neural */
-  --muted: oklch(0.15 0.02 260);
-  --muted-foreground: oklch(0.6 0.03 260);
+  /* Muted */
+  --muted: rgba(255, 255, 255, 0.1);
+  --muted-foreground: rgba(255, 255, 255, 0.6);
   
-  /* Accent - Magenta/Pink Neural */
-  --accent: oklch(0.7 0.2 330);
-  --accent-foreground: oklch(0.1 0.01 260);
+  /* Accent - follows primary */
+  --accent: #FF2D55;
+  --accent-foreground: #FFFFFF;
   
-  /* Destructive - Red alert */
-  --destructive: oklch(0.6 0.25 25);
-  --destructive-foreground: oklch(0.95 0.01 25);
+  /* ========== NEURO AI STATE COLORS (Notilus styled) ========== */
+  --state-idle: #6B7280;
+  --state-listening: #00FFFF;
+  --state-thinking: #FF2D92;
+  --state-speaking: #FF9500;
+  --state-error: #FF453A;
+  
+  /* Semantic Colors */
+  --success: #00FF88;
+  --success-alt: #34C759;
+  --error: #FF0040;
+  --error-alt: #FF3B30;
+  --warning: #FFAA00;
+  --info: #00FFFF;
+  
+  /* Destructive */
+  --destructive: #FF453A;
+  --destructive-foreground: #FFFFFF;
   
   /* Borders & Inputs */
-  --border: oklch(0.25 0.04 260);
-  --input: oklch(0.18 0.03 260);
-  --ring: oklch(0.75 0.18 195);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(255, 45, 85, 0.4);
+  --input: rgba(255, 255, 255, 0.05);
+  --ring: #FF2D55;
   
-  /* Neuro-specific tokens */
-  --neuro-glow-cyan: oklch(0.75 0.18 195);
-  --neuro-glow-magenta: oklch(0.7 0.2 330);
-  --neuro-glow-amber: oklch(0.8 0.18 85);
-  --neuro-surface: oklch(0.12 0.015 260 / 0.7);
-  --neuro-surface-elevated: oklch(0.16 0.02 260 / 0.8);
-  --neuro-border-glow: oklch(0.75 0.18 195 / 0.3);
-  
-  /* State colors */
-  --state-idle: oklch(0.5 0.1 195);
-  --state-listening: oklch(0.75 0.18 195);
-  --state-thinking: oklch(0.7 0.2 330);
-  --state-speaking: oklch(0.8 0.18 85);
-  --state-error: oklch(0.6 0.25 25);
+  /* ========== NOTILUS GLOW EFFECTS ========== */
+  --glow-primary: rgba(255, 45, 85, 0.5);
+  --glow-primary-strong: rgba(255, 45, 85, 0.8);
+  --glow-cyan: rgba(0, 255, 255, 0.5);
+  --glow-magenta: rgba(255, 45, 146, 0.5);
+  --glow-amber: rgba(255, 149, 0, 0.5);
+  --glow-success: rgba(0, 255, 136, 0.5);
   
   /* Charts */
-  --chart-1: oklch(0.75 0.18 195);
-  --chart-2: oklch(0.7 0.2 330);
-  --chart-3: oklch(0.8 0.18 85);
-  --chart-4: oklch(0.65 0.15 145);
-  --chart-5: oklch(0.6 0.25 25);
+  --chart-1: #FF2D55;
+  --chart-2: #00FFFF;
+  --chart-3: #34C759;
+  --chart-4: #FF2D92;
+  --chart-5: #FF9500;
   
-  --radius: 1rem;
+  --radius: 12px;
   
   /* Sidebar */
-  --sidebar: oklch(0.1 0.015 260);
-  --sidebar-foreground: oklch(0.95 0.01 260);
-  --sidebar-primary: oklch(0.75 0.18 195);
-  --sidebar-primary-foreground: oklch(0.1 0.01 260);
-  --sidebar-accent: oklch(0.18 0.03 260);
-  --sidebar-accent-foreground: oklch(0.95 0.01 260);
-  --sidebar-border: oklch(0.25 0.04 260);
-  --sidebar-ring: oklch(0.75 0.18 195);
+  --sidebar: #0B0B11;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FF2D55;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: rgba(255, 45, 85, 0.15);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgba(255, 45, 85, 0.2);
+  --sidebar-ring: #FF2D55;
 }
 
-/* Dark mode is the default for Neuro */
-.dark {
-  --background: oklch(0.06 0.01 260);
-  --foreground: oklch(0.95 0.01 260);
-  --card: oklch(0.1 0.015 260);
-  --card-foreground: oklch(0.95 0.01 260);
-  --popover: oklch(0.12 0.02 260);
-  --popover-foreground: oklch(0.95 0.01 260);
-  --primary: oklch(0.8 0.2 195);
-  --primary-foreground: oklch(0.08 0.01 260);
-  --secondary: oklch(0.15 0.025 260);
-  --secondary-foreground: oklch(0.9 0.05 195);
-  --muted: oklch(0.12 0.015 260);
-  --muted-foreground: oklch(0.55 0.02 260);
-  --accent: oklch(0.75 0.22 330);
-  --accent-foreground: oklch(0.08 0.01 260);
-  --destructive: oklch(0.55 0.25 25);
-  --destructive-foreground: oklch(0.95 0.01 25);
-  --border: oklch(0.22 0.035 260);
-  --input: oklch(0.15 0.025 260);
-  --ring: oklch(0.8 0.2 195);
-  --chart-1: oklch(0.8 0.2 195);
-  --chart-2: oklch(0.75 0.22 330);
-  --chart-3: oklch(0.85 0.2 85);
-  --chart-4: oklch(0.7 0.17 145);
-  --chart-5: oklch(0.65 0.27 25);
-  --sidebar: oklch(0.08 0.012 260);
-  --sidebar-foreground: oklch(0.95 0.01 260);
-  --sidebar-primary: oklch(0.8 0.2 195);
-  --sidebar-primary-foreground: oklch(0.08 0.01 260);
-  --sidebar-accent: oklch(0.15 0.025 260);
-  --sidebar-accent-foreground: oklch(0.95 0.01 260);
-  --sidebar-border: oklch(0.22 0.035 260);
-  --sidebar-ring: oklch(0.8 0.2 195);
+/* ========== ALTERNATIVE THEME COLORS ========== */
+.theme-cyber-blue {
+  --primary: #007AFF;
+  --primary-dark: #0051D5;
+  --accent: #007AFF;
+  --ring: #007AFF;
+  --glow-primary: rgba(0, 122, 255, 0.5);
+  --glow-primary-strong: rgba(0, 122, 255, 0.8);
+  --border-accent: rgba(0, 122, 255, 0.4);
+  --state-thinking: #007AFF;
+}
+
+.theme-matrix-green {
+  --primary: #34C759;
+  --primary-dark: #248A3D;
+  --accent: #34C759;
+  --ring: #34C759;
+  --glow-primary: rgba(52, 199, 89, 0.5);
+  --glow-primary-strong: rgba(52, 199, 89, 0.8);
+  --border-accent: rgba(52, 199, 89, 0.4);
+  --state-thinking: #34C759;
+}
+
+.theme-neon-violet {
+  --primary: #5856D6;
+  --primary-dark: #3D3BA8;
+  --accent: #5856D6;
+  --ring: #5856D6;
+  --glow-primary: rgba(88, 86, 214, 0.5);
+  --glow-primary-strong: rgba(88, 86, 214, 0.8);
+  --border-accent: rgba(88, 86, 214, 0.4);
+  --state-thinking: #5856D6;
+}
+
+.theme-fire-orange {
+  --primary: #FF9500;
+  --primary-dark: #CC7700;
+  --accent: #FF9500;
+  --ring: #FF9500;
+  --glow-primary: rgba(255, 149, 0, 0.5);
+  --glow-primary-strong: rgba(255, 149, 0, 0.8);
+  --border-accent: rgba(255, 149, 0, 0.4);
+  --state-thinking: #FF9500;
+}
+
+.theme-cyber-pink {
+  --primary: #FF2D92;
+  --primary-dark: #CC2474;
+  --accent: #FF2D92;
+  --ring: #FF2D92;
+  --glow-primary: rgba(255, 45, 146, 0.5);
+  --glow-primary-strong: rgba(255, 45, 146, 0.8);
+  --border-accent: rgba(255, 45, 146, 0.4);
+  --state-thinking: #FF2D92;
 }
 
 @theme inline {
-  /* Typography - Orbitron for headings, Geist for body */
-  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
-  --font-display: 'Orbitron', 'Geist', system-ui, sans-serif;
+  /* Typography - Orbitron for headings, Rajdhani for body */
+  --font-sans: var(--font-rajdhani), 'Rajdhani', system-ui, sans-serif;
+  --font-mono: var(--font-rajdhani), 'Rajdhani', monospace;
+  --font-display: var(--font-orbitron), 'Orbitron', system-ui, sans-serif;
   
   /* Core colors */
   --color-background: var(--background);
@@ -144,15 +189,12 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   
-  /* Neuro-specific colors */
-  --color-neuro-glow-cyan: var(--neuro-glow-cyan);
-  --color-neuro-glow-magenta: var(--neuro-glow-magenta);
-  --color-neuro-glow-amber: var(--neuro-glow-amber);
-  --color-neuro-surface: var(--neuro-surface);
-  --color-neuro-surface-elevated: var(--neuro-surface-elevated);
-  --color-neuro-border-glow: var(--neuro-border-glow);
+  /* Notilus specific */
+  --color-chrome: var(--chrome);
+  --color-chrome-dark: var(--chrome-dark);
+  --color-chrome-light: var(--chrome-light);
   
-  /* State colors */
+  /* AI State colors */
   --color-state-idle: var(--state-idle);
   --color-state-listening: var(--state-listening);
   --color-state-thinking: var(--state-thinking);
@@ -195,193 +237,477 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.75 0.18 195 / 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 100%, oklch(0.7 0.2 330 / 0.05), transparent);
+    background: var(--native-bg);
   }
 }
 
 /* ==============================================
-   NEURO ANIMATION UTILITIES
+   NEURO GLASSMORPHISM (Notilus Style)
    ============================================== */
 
-@keyframes neuro-pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.02);
-  }
-}
-
-@keyframes neuro-glow {
-  0%, 100% {
-    box-shadow: 
-      0 0 20px oklch(0.75 0.18 195 / 0.3),
-      0 0 40px oklch(0.75 0.18 195 / 0.1),
-      inset 0 0 20px oklch(0.75 0.18 195 / 0.05);
-  }
-  50% {
-    box-shadow: 
-      0 0 30px oklch(0.75 0.18 195 / 0.5),
-      0 0 60px oklch(0.75 0.18 195 / 0.2),
-      inset 0 0 30px oklch(0.75 0.18 195 / 0.1);
-  }
-}
-
-@keyframes neuro-thinking {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes neuro-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes neuro-ripple {
-  0% {
-    transform: scale(0.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
-@keyframes neuro-scan {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes neuro-text-reveal {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-/* Animation utility classes */
-.animate-neuro-pulse {
-  animation: neuro-pulse 2s ease-in-out infinite;
-}
-
-.animate-neuro-glow {
-  animation: neuro-glow 3s ease-in-out infinite;
-}
-
-.animate-neuro-thinking {
-  background: linear-gradient(
-    90deg,
-    oklch(0.75 0.18 195),
-    oklch(0.7 0.2 330),
-    oklch(0.75 0.18 195)
-  );
-  background-size: 200% 100%;
-  animation: neuro-thinking 2s linear infinite;
-}
-
-.animate-neuro-float {
-  animation: neuro-float 4s ease-in-out infinite;
-}
-
-.animate-neuro-ripple {
-  animation: neuro-ripple 1.5s ease-out infinite;
-}
-
-.animate-neuro-scan {
-  animation: neuro-scan 2s ease-in-out infinite;
-}
-
-.animate-neuro-text-reveal {
-  animation: neuro-text-reveal 0.4s ease-out forwards;
-}
-
-/* Glassmorphism utilities */
 .glass-surface {
-  background: oklch(0.12 0.015 260 / 0.7);
-  backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid oklch(0.75 0.18 195 / 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid var(--border-accent);
 }
 
 .glass-surface-elevated {
-  background: oklch(0.16 0.02 260 / 0.8);
-  backdrop-filter: blur(24px) saturate(1.6);
-  border: 1px solid oklch(0.75 0.18 195 / 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid var(--border-accent);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--glow-primary);
 }
 
-/* Glow effects */
+/* ==============================================
+   NEURO GLOW EFFECTS (Notilus Neon)
+   ============================================== */
+
 .glow-cyan {
   box-shadow: 
-    0 0 20px oklch(0.75 0.18 195 / 0.4),
-    0 0 40px oklch(0.75 0.18 195 / 0.2);
+    0 0 20px var(--glow-cyan),
+    0 0 40px rgba(0, 255, 255, 0.3),
+    0 0 60px rgba(0, 255, 255, 0.2);
 }
 
 .glow-magenta {
   box-shadow: 
-    0 0 20px oklch(0.7 0.2 330 / 0.4),
-    0 0 40px oklch(0.7 0.2 330 / 0.2);
+    0 0 20px var(--glow-magenta),
+    0 0 40px rgba(255, 45, 146, 0.3),
+    0 0 60px rgba(255, 45, 146, 0.2);
 }
 
 .glow-amber {
   box-shadow: 
-    0 0 20px oklch(0.8 0.18 85 / 0.4),
-    0 0 40px oklch(0.8 0.18 85 / 0.2);
+    0 0 20px var(--glow-amber),
+    0 0 40px rgba(255, 149, 0, 0.3),
+    0 0 60px rgba(255, 149, 0, 0.2);
 }
 
-/* Text glow */
-.text-glow-cyan {
-  text-shadow: 0 0 10px oklch(0.75 0.18 195 / 0.8);
+.neon-glow {
+  box-shadow: 
+    0 0 20px var(--glow-primary),
+    0 0 40px rgba(255, 45, 85, 0.3),
+    0 0 60px rgba(255, 45, 85, 0.2);
 }
 
-.text-glow-magenta {
-  text-shadow: 0 0 10px oklch(0.7 0.2 330 / 0.8);
+.neon-glow-sm {
+  box-shadow: 
+    0 0 10px var(--glow-primary),
+    0 0 20px rgba(255, 45, 85, 0.3);
 }
 
-/* Scrollbar styling */
+.neon-text {
+  text-shadow: 
+    0 0 10px var(--glow-primary),
+    0 0 20px rgba(255, 45, 85, 0.5),
+    0 0 40px rgba(255, 45, 85, 0.3);
+}
+
+/* ==============================================
+   NEURO ANIMATIONS (Notilus Style)
+   ============================================== */
+
+@keyframes neuro-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px var(--glow-cyan),
+      0 0 40px rgba(0, 255, 255, 0.2);
+  }
+  33% {
+    box-shadow: 
+      0 0 20px var(--glow-magenta),
+      0 0 40px rgba(255, 45, 146, 0.2);
+  }
+  66% {
+    box-shadow: 
+      0 0 20px var(--glow-primary),
+      0 0 40px rgba(255, 45, 85, 0.2);
+  }
+}
+
+@keyframes neuro-pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes neuro-thinking {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes neuro-scan {
+  0% { 
+    transform: translateY(-100%); 
+    opacity: 0; 
+  }
+  50% { 
+    opacity: 0.5; 
+  }
+  100% { 
+    transform: translateY(100%); 
+    opacity: 0; 
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px var(--glow-primary),
+      0 0 40px rgba(255, 45, 85, 0.3);
+  }
+  50% { 
+    box-shadow: 
+      0 0 40px var(--glow-primary-strong),
+      0 0 80px var(--glow-primary);
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% { 
+    border-color: var(--border-accent);
+    box-shadow: 0 0 10px rgba(255, 45, 85, 0.3);
+  }
+  50% { 
+    border-color: var(--primary);
+    box-shadow: 0 0 25px rgba(255, 45, 85, 0.6);
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.animate-neuro-glow {
+  animation: neuro-glow 4s ease-in-out infinite;
+}
+
+.animate-neuro-pulse {
+  animation: neuro-pulse 2s ease-in-out infinite;
+}
+
+.animate-neuro-thinking {
+  background-size: 200% 100%;
+  animation: neuro-thinking 2s linear infinite;
+}
+
+.animate-neuro-scan {
+  animation: neuro-scan 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.gradient-animated {
+  background: linear-gradient(-45deg, #0A0A0F, #1A0A1F, #0A0A1F, #1A0A0F);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* ==============================================
+   NOTILUS GEOMETRIC CORNERS (Signature Visual)
+   ============================================== */
+
+.geometric-corners {
+  position: relative;
+}
+
+.geometric-corners::before,
+.geometric-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary);
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px var(--glow-primary));
+}
+
+.geometric-corners::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.geometric-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Additional corners via pseudo elements on children */
+.geometric-corners > .corner-tl,
+.geometric-corners > .corner-tr,
+.geometric-corners > .corner-bl,
+.geometric-corners > .corner-br {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary);
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px var(--glow-primary));
+}
+
+.geometric-corners > .corner-tr {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.geometric-corners > .corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+/* ==============================================
+   NOTILUS TYPOGRAPHY
+   ============================================== */
+
+.font-display {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.text-display-xl {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.text-display-lg {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.text-display-md {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text-headline {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.text-title {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.text-subtitle {
+  font-family: var(--font-orbitron), 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.text-body {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.text-body-sm {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.text-label {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==============================================
+   NOTILUS SCROLLBAR
+   ============================================== */
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(0.1 0.01 260);
+  background: var(--chrome-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.05 260);
-  border-radius: 3px;
+  background: var(--border-accent);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.75 0.18 195 / 0.6);
+  background: var(--primary);
 }
+
+/* ==============================================
+   NEURO-NOTILUS COMPONENT STYLES
+   ============================================== */
+
+/* Futuristic Button */
+.btn-neuro {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-neuro-primary {
+  background: linear-gradient(135deg, var(--primary), var(--state-thinking));
+  color: white;
+  box-shadow: 0 0 20px var(--glow-primary);
+}
+
+.btn-neuro-primary:hover {
+  box-shadow: 0 0 30px var(--glow-primary-strong);
+  transform: translateY(-2px);
+}
+
+.btn-neuro-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--border-accent);
+  color: var(--primary);
+}
+
+.btn-neuro-secondary:hover {
+  background: rgba(255, 45, 85, 0.1);
+  border-color: var(--primary);
+}
+
+.btn-neuro-ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-neuro-ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Futuristic Input */
+.input-neuro {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.input-neuro::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input-neuro:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px var(--glow-primary);
+  outline: none;
+}
+
+/* Futuristic Badge */
+.badge-neuro {
+  font-family: var(--font-rajdhani), 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255, 45, 85, 0.15);
+  border: 1px solid var(--border-accent);
+  color: var(--primary);
+}
+
+.badge-neuro-glow {
+  box-shadow: 0 0 8px var(--glow-primary);
+}
+
+/* State indicator colors */
+.bg-state-idle { background-color: var(--state-idle); }
+.bg-state-listening { background-color: var(--state-listening); }
+.bg-state-thinking { background-color: var(--state-thinking); }
+.bg-state-speaking { background-color: var(--state-speaking); }
+.bg-state-error { background-color: var(--state-error); }
+
+.text-state-idle { color: var(--state-idle); }
+.text-state-listening { color: var(--state-listening); }
+.text-state-thinking { color: var(--state-thinking); }
+.text-state-speaking { color: var(--state-speaking); }
+.text-state-error { color: var(--state-error); }
+
+.border-state-listening { border-color: var(--state-listening); }
+.border-state-thinking { border-color: var(--state-thinking); }

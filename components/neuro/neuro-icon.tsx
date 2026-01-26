@@ -7,6 +7,7 @@ import type { AIState } from "./state-indicator";
 // ==============================================
 // NEURO ICON - Animated brain/neural logo
 // Central visual identity element
+// Styled with Notilus neon colors and effects
 // ==============================================
 
 interface NeuroIconProps {
@@ -16,15 +17,25 @@ interface NeuroIconProps {
 }
 
 function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
+  // Notilus-themed state colors
   const stateColors: Record<AIState, string> = {
-    idle: "oklch(0.5 0.1 195)",
-    listening: "oklch(0.75 0.18 195)",
-    thinking: "oklch(0.7 0.2 330)",
-    speaking: "oklch(0.8 0.18 85)",
-    error: "oklch(0.6 0.25 25)",
+    idle: "var(--state-idle)",
+    listening: "var(--state-listening)",
+    thinking: "var(--state-thinking)",
+    speaking: "var(--state-speaking)",
+    error: "var(--state-error)",
+  };
+
+  const glowColors: Record<AIState, string> = {
+    idle: "rgba(107, 114, 128, 0.5)",
+    listening: "var(--glow-cyan)",
+    thinking: "var(--glow-magenta)",
+    speaking: "var(--glow-amber)",
+    error: "rgba(255, 69, 58, 0.5)",
   };
 
   const color = stateColors[state];
+  const glowColor = glowColors[state];
 
   return (
     <motion.svg
@@ -38,7 +49,7 @@ function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Outer glow filter */}
+      {/* Notilus neon glow filter */}
       <defs>
         <filter id="neuro-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="2" result="blur" />
@@ -47,14 +58,38 @@ function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        <filter id="neuro-glow-intense" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         <linearGradient id="neuro-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={color} />
-          <stop offset="100%" stopColor={stateColors.thinking} />
+          <stop offset="100%" stopColor="var(--primary)" />
         </linearGradient>
       </defs>
 
-      {/* Central brain shape */}
-      <motion.g filter="url(#neuro-glow)">
+      {/* Outer hexagonal frame - Notilus geometric style */}
+      <motion.path
+        d="M24 4L40 14V34L24 44L8 34V14L24 4Z"
+        stroke={color}
+        strokeWidth={1}
+        fill="none"
+        opacity={0.3}
+        filter="url(#neuro-glow)"
+        initial={{ pathLength: 0 }}
+        animate={{ 
+          pathLength: 1,
+          opacity: state === "idle" ? 0.2 : 0.4,
+        }}
+        transition={{ duration: 1.5 }}
+      />
+
+      {/* Central brain shape with neon effect */}
+      <motion.g filter={state !== "idle" ? "url(#neuro-glow-intense)" : "url(#neuro-glow)"}>
         {/* Neural network nodes */}
         {[
           { cx: 24, cy: 12, delay: 0 },
@@ -88,7 +123,7 @@ function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
           />
         ))}
 
-        {/* Neural connections */}
+        {/* Neural connections with Notilus neon glow */}
         {[
           "M24 12 L14 20",
           "M24 12 L34 20",
@@ -125,7 +160,7 @@ function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
           />
         ))}
 
-        {/* Central pulse for active states */}
+        {/* Central pulse for active states - Notilus style */}
         {state !== "idle" && (
           <motion.circle
             cx={24}
@@ -144,6 +179,31 @@ function NeuroIcon({ state = "idle", size = 48, className }: NeuroIconProps) {
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
+            style={{
+              filter: `drop-shadow(0 0 10px ${glowColor})`,
+            }}
+          />
+        )}
+
+        {/* Outer rotating ring for thinking state */}
+        {state === "thinking" && (
+          <motion.circle
+            cx={24}
+            cy={24}
+            r={20}
+            fill="none"
+            stroke="url(#neuro-gradient)"
+            strokeWidth={1}
+            strokeDasharray="10 5"
+            animate={{
+              rotate: 360,
+            }}
+            transition={{
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+            style={{ transformOrigin: "center" }}
           />
         )}
       </motion.g>
