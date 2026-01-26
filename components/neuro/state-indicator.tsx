@@ -14,7 +14,9 @@ interface StateIndicatorProps {
   state: AIState;
   size?: "sm" | "md" | "lg" | "xl";
   showLabel?: boolean;
+  showPulse?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
 const stateConfig: Record<
@@ -94,13 +96,17 @@ const sizeConfig: Record<
 };
 
 function StateIndicator({
-  state,
+  state = "idle",
   size = "md",
   showLabel = false,
+  showPulse = false,
   className,
+  onClick,
 }: StateIndicatorProps) {
-  const config = stateConfig[state];
-  const sizes = sizeConfig[size];
+  // Ensure we have a valid state, fallback to idle
+  const validState = stateConfig[state] ? state : "idle";
+  const config = stateConfig[validState];
+  const sizes = sizeConfig[size] ?? sizeConfig.md;
 
   return (
     <div className={cn("flex flex-col items-center gap-2", className)}>
@@ -108,19 +114,24 @@ function StateIndicator({
       <div
         className={cn(
           "relative flex items-center justify-center",
-          sizes.container
+          sizes.container,
+          onClick && "cursor-pointer"
         )}
+        onClick={onClick}
+        onKeyDown={(e) => e.key === "Enter" && onClick?.()}
+        role={onClick ? "button" : undefined}
+        tabIndex={onClick ? 0 : undefined}
       >
         {/* Outer ripple rings */}
         <AnimatePresence>
-          {(state === "listening" || state === "thinking") && (
+          {(validState === "listening" || validState === "thinking") && (
             <>
               <motion.div
                 key="ring-1"
                 className={cn(
                   "absolute rounded-full border-2 opacity-30",
                   sizes.rings[1],
-                  state === "listening"
+                  validState === "listening"
                     ? "border-state-listening"
                     : "border-state-thinking"
                 )}
@@ -140,7 +151,7 @@ function StateIndicator({
                 className={cn(
                   "absolute rounded-full border opacity-20",
                   sizes.rings[0],
-                  state === "listening"
+                  validState === "listening"
                     ? "border-state-listening"
                     : "border-state-thinking"
                 )}
@@ -165,12 +176,12 @@ function StateIndicator({
           className={cn(
             "relative rounded-full",
             sizes.core,
-            state === "thinking"
+            validState === "thinking"
               ? "animate-neuro-thinking bg-gradient-to-r from-state-thinking via-primary to-state-thinking bg-[length:200%_100%]"
               : config.bgColor
           )}
           animate={
-            state === "speaking"
+            validState === "speaking"
               ? {
                   scale: [1, 1.2, 1],
                   boxShadow: [
@@ -179,7 +190,7 @@ function StateIndicator({
                     "0 0 10px oklch(0.8 0.18 85 / 0.5)",
                   ],
                 }
-              : state === "listening"
+              : validState === "listening"
                 ? {
                     scale: [1, 1.15, 1],
                     boxShadow: [
@@ -188,20 +199,20 @@ function StateIndicator({
                       "0 0 10px oklch(0.75 0.18 195 / 0.5)",
                     ],
                   }
-                : state === "error"
+                : validState === "error"
                   ? {
                       x: [-2, 2, -2, 2, 0],
                     }
                   : {}
           }
           transition={{
-            duration: state === "error" ? 0.4 : 1.5,
-            repeat: state === "error" ? 2 : Number.POSITIVE_INFINITY,
+            duration: validState === "error" ? 0.4 : 1.5,
+            repeat: validState === "error" ? 2 : Number.POSITIVE_INFINITY,
             ease: "easeInOut",
           }}
           style={{
             boxShadow:
-              state === "idle"
+              validState === "idle"
                 ? "0 0 8px oklch(0.5 0.1 195 / 0.4)"
                 : undefined,
           }}
@@ -209,7 +220,7 @@ function StateIndicator({
 
         {/* Speaking wave effect */}
         <AnimatePresence>
-          {state === "speaking" && (
+          {validState === "speaking" && (
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0 }}
@@ -251,7 +262,7 @@ function StateIndicator({
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
-            key={state}
+            key={validState}
           >
             {config.label}
           </motion.span>
